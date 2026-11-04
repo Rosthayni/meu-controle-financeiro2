@@ -1,4 +1,4 @@
-# Meu Controle Financeiro — versão 4.0 (preparada para nuvem)
+# Meu Controle Financeiro — versão 4.2 (preparada para nuvem)
 
 ## O que mudou
 - Mantém as áreas de **Faturas**, **Parcelas** e **Limites**, além dos lançamentos, planejamento, importação CSV/OFX e backup JSON.
@@ -43,3 +43,15 @@ Ao entrar, se houver um documento na nuvem e os dados locais forem diferentes, o
 2. Envie para a raiz do repositório os arquivos `index.html`, `manifest.json`, `sw.js`, `icon-192.png`, `icon-512.png` e `supabase-setup.sql` (o SQL também pode ficar fora do repositório depois de executado).
 3. Em **Settings → Pages**, selecione `Deploy from a branch`, branch `main`, pasta `/(root)` e salve.
 4. Aguarde o site ficar disponível.
+
+
+## Versão 4.2 — histórico e edição
+- Cria pontos de recuperação automáticos das alterações salvas.
+- Mantém até 30 versões no navegador e até 30 versões na nuvem por usuário.
+- Permite consultar e restaurar versões anteriores.
+- Permite editar lançamentos; em compras parceladas, permite escolher entre editar somente a parcela selecionada ou todas as parcelas do grupo.
+- A exclusão e a restauração também geram pontos de recuperação.
+- Mantém o status de pagamento e a sincronização existentes.
+
+### Ativar o histórico na nuvem
+Execute o arquivo `supabase-setup.sql` atualizado no SQL Editor do mesmo projeto Supabase. O script preserva a tabela existente `user_finance_data` e acrescenta a tabela `user_finance_backups`, com RLS por usuário. O histórico local funciona sem essa tabela; o histórico em nuvem depende da execução do SQL.
