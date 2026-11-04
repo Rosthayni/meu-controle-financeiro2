@@ -144,8 +144,8 @@ window.editTx=id=>{
  const editGroup=group.length>1&&confirm('Este lançamento faz parte de um parcelamento.\\n\\nOK = editar todas as parcelas do grupo.\\nCancelar = editar somente esta parcela.');
  const description=prompt('Descrição:',t.baseDescription||t.description);if(description===null)return;
  const amountRaw=prompt('Valor'+(editGroup?' de cada parcela':'')+' (ex.: 125,50):',String(t.amount).replace('.',','));if(amountRaw===null)return;
- const amount=Number(String(amountRaw).replace(/\\./g,'').replace(',','.'));if(!(amount>0)){alert('Informe um valor válido.');return}
- const date=prompt('Data (AAAA-MM-DD):',t.date);if(date===null)return;if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(date)){alert('Data inválida.');return}
+ const amount=Number(String(amountRaw).replace(/\./g,'').replace(',','.'));if(!(amount>0)){alert('Informe um valor válido.');return}
+ const date=prompt('Data (AAAA-MM-DD):',t.date);if(date===null)return;const validDate=/^\d{4}-\d{2}-\d{2}$/.test(date)&&!Number.isNaN(Date.parse(date+'T12:00:00'))&&new Date(date+'T12:00:00').toISOString().slice(0,10)===date;if(!validDate){alert('Data inválida. Use o formato AAAA-MM-DD, por exemplo 2026-11-04.');return}
  const category=prompt('Categoria:',t.category||'Outros');if(category===null)return;
  const account=prompt('Conta/cartão:',t.account||'');if(account===null)return;
  const targets=editGroup?group:[t];
